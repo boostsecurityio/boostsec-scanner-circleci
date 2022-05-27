@@ -1,0 +1,10 @@
+version: 2.1
+
+description: >
+  Executes the Boost Security Scanner cli tool to scan repositories for
+  vulnerabilities and uploads results to the Boost API.
+
+# This information will be displayed in the orb registry and is not mandatory.
+display:
+  home_url: "https://www.boostsecurity.io"
+  source_url: "https://github.com/boostsecurityio/boostsec-scanner-circleci"

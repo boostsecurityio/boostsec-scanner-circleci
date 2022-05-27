@@ -1,0 +1,29 @@
+description: >
+  Add the boost scanner as a pipeline job command.
+
+usage:
+  version: 2.1
+
+  orbs:
+    boost-security-scanner: boost/security-scanner@x.y.z
+
+  workflows:
+    version: 2
+
+    build:
+      jobs:
+        - test
+        - scan:
+            context: boost-security
+        - push:
+            requires:
+              - test
+
+jobs:
+  scan:
+    executor: default
+    steps:
+      - checkout
+      - boost-security-scanner/scan:
+          action: scan
+          api_token_var: BOOST_API_TOKEN

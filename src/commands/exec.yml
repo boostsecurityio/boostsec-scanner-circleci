@@ -1,0 +1,83 @@
+description: >
+  Executes an external command which outputs Sarif to stdout and ingest's it's
+  results for upload to the Boost Security API.
+
+parameters:
+  api_endpoint_var:
+    description: >
+      Optional Boost API URL environment variable name
+    type: string
+    default: ""
+
+  api_token_var:
+    description: >
+      Boost API token environment variable name
+    type: env_var_name
+    default: BOOST_API_TOKEN
+
+  cli_additional_args:
+    description: >
+      Additional arguments to pass to boost cli
+    type: string
+    default: ""
+
+  cli_version:
+    description: >
+      CLI version to download, may be Major, Major.Minor or Major.Minor.Patch
+    type: string
+    default: "3.0"
+
+  exec_command:
+    description: >
+      A command to execute which outputs SARIF to stdout.
+    type: string
+
+  docker_copy_required:
+    description: >
+      Whether the executor requires "docker cp" or supports volume mounts
+    type: boolean
+    default: False
+
+  project_slug:
+    description: >
+      Optional override for the project_slug to use when uploading reports
+      to the API. If undefined, this will default to
+      ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.
+    type: string
+    default: ""
+
+  scanner_image:
+    description: >
+      Optional override for the Boost Scanner docker image URL.
+    type: string
+    default: ""
+
+  scanner_version:
+    description: >
+      Optional override for the Boost scanner docker image tag.
+    type: string
+    default: ""
+
+  step_name:
+    description: >
+      Identifier for this scanner step
+    type: string
+    default: ""
+
+steps:
+  - run:
+      name: Scanning repository
+      command: <<include(scripts/scan.sh)>>
+      environment:
+        BOOST_ACTION: exec
+        BOOST_API_ENDPOINT_VAR: <<parameters.api_endpoint_var>>
+        BOOST_API_TOKEN_VAR: <<parameters.api_token_var>>
+        BOOST_CLI_ARGUMENTS: <<parameters.cli_additional_args>>
+        BOOST_CLI_VERSION: <<parameters.cli_version>>
+        BOOST_EXEC_COMMAND: <<parameters.exec_command>>
+        BOOST_GIT_PROJECT: <<parameters.project_slug>>
+        BOOST_SCANNER_IMAGE: <<parameters.scanner_image>>
+        BOOST_SCANNER_VERSION: <<parameters.scanner_version>>
+        BOOST_STEP_NAME: <<parameters.step_name>>
+        DOCKER_COPY_REQUIRED: <<parameters.docker_copy_required>>
+      no_output_timeout: 120m
