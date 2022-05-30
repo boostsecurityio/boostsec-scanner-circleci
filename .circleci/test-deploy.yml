@@ -1,12 +1,12 @@
 version: 2.1
 orbs:
-  scanner: boostsecurityio/scanner@dev:<<pipeline.git.revision>>
+  boostsec: boostsecurityio/scanner@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
 filters: &filters
   tags:
     only: /.*/
 jobs:
-  integration-test-1:
+  command-tests:
     docker:
       - image: cimg/base:stable
     steps:
@@ -17,8 +17,6 @@ workflows:
   test-deploy:
     jobs:
       - command-tests:
-          filters: *filters
-      - integration-test-1:
           context: boostsecurity-dev
           filters: *filters
       - orb-tools/pack:
