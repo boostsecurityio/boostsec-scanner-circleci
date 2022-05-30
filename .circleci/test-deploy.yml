@@ -13,6 +13,9 @@ jobs:
       - checkout
       - boostsec/scan:
           api_token_var: BOOST_API_TOKEN
+          # TODO -- PR number not preserved during dynamic config
+          cli_additional_args: "--pull-request=1"
+
 workflows:
   test-deploy:
     jobs:
