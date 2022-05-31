@@ -6,7 +6,15 @@ filters: &filters
   tags:
     only: /.*/
 jobs:
-  command-tests:
+  command-tests-main:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - boostsec/scan:
+          api_token_var: BOOST_API_TOKEN
+
+  command-tests-pr:
     docker:
       - image: cimg/base:stable
     steps:
@@ -19,9 +27,18 @@ jobs:
 workflows:
   test-deploy:
     jobs:
-      - command-tests:
+      - command-tests-main:
           context: boostsecurity-dev
-          filters: *filters
+          filters:
+            branches:
+              only:
+                - main
+      - command-tests-pr:
+          context: boostsecurity-dev
+          filters:
+            branches:
+              ignore:
+                - main
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
@@ -30,7 +47,7 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - command-tests
+            - command-tests-main
           context: orb-publishing
           filters:
             branches:
