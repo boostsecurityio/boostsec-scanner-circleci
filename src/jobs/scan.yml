@@ -1,0 +1,77 @@
+description: >
+  Scans the git repository for security issues or violations and uploads
+  the results to the Boost Security API.
+
+machine:
+  docker_layer_caching: <<parameters.executor_docker_layer_caching>>
+  image: ubuntu-2204:2022.04.1
+
+parameters:
+  api_endpoint_var:
+    description: >
+      Optional, Boost API URL environment variable name
+    type: string
+    default: ""
+
+  api_token_var:
+    description: >
+      Boost API token environment variable name
+    type: env_var_name
+    default: BOOST_API_TOKEN
+
+  cli_additional_args:
+    description: >
+      Additional arguments to pass to boost cli
+    type: string
+    default: ""
+
+  cli_version:
+    description: >
+      CLI version to download
+    type: string
+    default: "3.0"
+
+  executor_docker_layer_caching:
+    description: >
+      Enable or disable executor's docker layer caching
+    type: boolean
+    default: true
+
+  project_slug:
+    description: >
+      Optional override for the project_slug to use when uploading reports
+      to the API. If undefined, this will default to
+      ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.
+    type: string
+    default: ""
+
+  scanner_image:
+    description: >
+      Optional override for the Boost Scanner docker image URL.
+    type: string
+    default: ""
+
+  scanner_version:
+    description: >
+      Optional override for the Boost scanner docker image tag.
+    type: string
+    default: ""
+
+  step_name:
+    description: >
+      Identifier for this scanner step
+    type: string
+    default: ""
+
+steps:
+  - checkout
+  - scan:
+      api_endpoint_var: <<parameters.api_endpoint_var>>
+      api_token_var: <<parameters.api_token_var>>
+      cli_additional_args: <<parameters.cli_additional_args>>
+      cli_version: <<parameters.cli_version>>
+      docker_copy_required: false
+      project_slug: <<parameters.project_slug>>
+      scanner_image: <<parameters.scanner_image>>
+      scanner_version: <<parameters.scanner_version>>
+      step_name: <<parameters.step_name>>

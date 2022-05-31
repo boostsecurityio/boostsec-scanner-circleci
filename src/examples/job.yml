@@ -1,0 +1,27 @@
+description: |
+  Add the boost scanner as a pipeline workflow job.
+
+  Prior to adding this step, you following environment variables should be
+  defined either in a context object or through repository environment vars.
+
+  BOOST_API_TOKEN -- The boost api token
+
+usage:
+  version: 2.1
+
+  orbs:
+    boost-security-scanner: boost/security-scanner@x.y.z
+
+  workflows:
+    version: 2
+
+    build:
+      jobs:
+        - test
+        - boost-security-scanner/scan:
+            name: scan
+            context: boost-security
+            api_token_var: BOOST_API_TOKEN
+        - push:
+            requires:
+              - test

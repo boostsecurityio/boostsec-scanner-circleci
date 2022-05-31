@@ -1,0 +1,39 @@
+version: 2.1
+orbs:
+  boostsec: boostsecurityio/scanner@dev:<<pipeline.git.revision>>
+  orb-tools: circleci/orb-tools@11.1
+filters: &filters
+  tags:
+    only: /.*/
+jobs:
+  command-tests:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - boostsec/scan:
+          api_token_var: BOOST_API_TOKEN
+          # TODO -- PR number not preserved during dynamic config
+          cli_additional_args: "--pull-request=1"
+
+workflows:
+  test-deploy:
+    jobs:
+      - command-tests:
+          context: boostsecurity-dev
+          filters: *filters
+      - orb-tools/pack:
+          filters: *filters
+      - orb-tools/publish:
+          orb-name: boostsecurityio/scanner
+          vcs-type: << pipeline.project.type >>
+          pub-type: production
+          requires:
+            - orb-tools/pack
+            - command-tests
+          context: orb-publishing
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
