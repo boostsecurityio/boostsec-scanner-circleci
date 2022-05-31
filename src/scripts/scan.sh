@@ -32,6 +32,14 @@ init.config ()
   if [ "${CIRCLE_BRANCH}" != "${BOOST_MAIN_BRANCH}" ]; then
     export BOOST_GIT_BASE=${BOOST_MAIN_BRANCH}
   fi
+
+  if [ -n "${BOOST_API_ENDPOINT_VAR:-}" ]; then
+    export BOOST_API_ENDPOINT=${!BOOST_API_ENDPOINT_VAR}
+  fi
+
+  if [ -n "${BOOST_API_TOKEN_VAR:-}" ]; then
+    export BOOST_API_TOKEN=${!BOOST_API_TOKEN_VAR}
+  fi
 }
 
 init.cli ()
