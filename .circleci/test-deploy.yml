@@ -11,6 +11,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - setup_remote_docker
       - boostsec/scan:
           api_token_var: BOOST_API_TOKEN
 
@@ -19,6 +20,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - setup_remote_docker
       - boostsec/scan:
           api_token_var: BOOST_API_TOKEN
           # TODO -- PR number not preserved during dynamic config
