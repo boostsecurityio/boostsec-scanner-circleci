@@ -14,6 +14,8 @@ jobs:
       - setup_remote_docker
       - boostsec/scan:
           api_token_var: BOOST_API_TOKEN
+          # docker cp required with docker executor
+          docker_copy_required: true
 
   command-tests-pr:
     docker:
@@ -25,6 +27,8 @@ jobs:
           api_token_var: BOOST_API_TOKEN
           # TODO -- PR number not preserved during dynamic config
           cli_additional_args: "--pull-request=1"
+          # docker cp required with docker executor
+          docker_copy_required: true
 
 workflows:
   test-deploy:
