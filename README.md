@@ -7,7 +7,7 @@ vulnerabilities and uploads results to the Boost API.
 
 ## Resources
 
-[CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/boostsecurityio/boostsec-scanner-circleci) - The official registry page of this orb for all versions, executors, commands, and jobs described.
+[CircleCI Orb Registry Page](https://circleci.com/developer/orbs/orb/boostsecurityio/scanner) - The official registry page of this orb for all versions, executors, commands, and jobs described.
 
 ### How to Publish
 
