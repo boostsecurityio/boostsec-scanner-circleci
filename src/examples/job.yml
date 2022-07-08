@@ -10,7 +10,7 @@ usage:
   version: 2.1
 
   orbs:
-    boost-security-scanner: boost/security-scanner@x.y.z
+    boost-security-scanner: boostsecurityio/scanner@3.0.0
 
   workflows:
     version: 2
