@@ -25,5 +25,4 @@ jobs:
     steps:
       - checkout
       - boost-security-scanner/scan:
-          action: scan
           api_token_var: BOOST_API_TOKEN
