@@ -1,10 +1,13 @@
 version: 2.1
+
 orbs:
   boostsec: boostsecurityio/scanner@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
+
 filters: &filters
   tags:
     only: /.*/
+
 jobs:
   command-tests-main:
     docker:
@@ -13,9 +16,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - boostsec/scan:
-          api_token_var: BOOST_API_TOKEN
-          # docker cp required with docker executor
-          docker_copy_required: true
+          api_enabled: false # TODO: temporarily disabled
+          registry_module: scanners/boostsecurityio/native-scanner
 
   command-tests-pr:
     docker:
@@ -24,11 +26,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - boostsec/scan:
-          api_token_var: BOOST_API_TOKEN
-          # TODO -- PR number not preserved during dynamic config
-          cli_additional_args: "--pull-request=1"
-          # docker cp required with docker executor
-          docker_copy_required: true
+          api_enabled: false # TODO: temporarily disabled
+          additional_args: "--pull-request=1" # TODO -- PR number not preserved during dynamic config
+          registry_module: scanners/boostsecurityio/native-scanner
 
 workflows:
   test-deploy:
