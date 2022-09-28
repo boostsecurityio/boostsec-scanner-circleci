@@ -26,3 +26,4 @@ jobs:
       - checkout
       - boost-security-scanner/scan:
           api_token_var: BOOST_API_TOKEN
+          registry_module: scanners/boostsecurityio/native-scanner
