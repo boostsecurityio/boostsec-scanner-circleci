@@ -9,7 +9,7 @@ setup ()
   export BATS_ENABLED=true
   export SCRIPT_PATH=${PROJECT_ROOT}/src/scripts
 
-  export BOOST_MAIN_BRANCH="main" # do not attempt git ops
+  export BOOST_GIT_MAIN_BRANCH="main" # do not attempt git ops
 
   export BOOST_API_TOKEN_VAR=BOOST_API_TOKEN_VALUE
   export BOOST_API_TOKEN_VALUE=123456
@@ -114,8 +114,8 @@ teardown ()
   assert_equal "${BOOST_DOWNLOAD_URL}" "https://localhost/boost-cli/get-boost-cli"
 }
 
-@test "init.config BOOST_MAIN_BRANCH defined" {
-  export BOOST_MAIN_BRANCH=""
+@test "init.config BOOST_GIT_MAIN_BRANCH defined" {
+  export BOOST_GIT_MAIN_BRANCH=""
 
   pushd ${BATS_TEST_TMPDIR} > /dev/null
   git init test-repo
@@ -123,14 +123,14 @@ teardown ()
   git remote add origin https://github.com/bats-core/bats-core.git
   init.config
 
-  assert_equal "${BOOST_MAIN_BRANCH}" "master"
+  assert_equal "${BOOST_GIT_MAIN_BRANCH}" "master"
 }
 
-@test "init.config BOOST_MAIN_BRANCH preserved" {
-  export BOOST_MAIN_BRANCH="main"
+@test "init.config BOOST_GIT_MAIN_BRANCH preserved" {
+  export BOOST_GIT_MAIN_BRANCH="main"
   init.config
 
-  assert_equal "${BOOST_MAIN_BRANCH}" "main"
+  assert_equal "${BOOST_GIT_MAIN_BRANCH}" "main"
 }
 
 @test "init.config BOOST_API_TOKEN defined" {
@@ -144,11 +144,11 @@ teardown ()
 
 @test "init.config BOOST_GIT_BASE defined" {
   export BOOST_GIT_BASE=""
-  export BOOST_MAIN_BRANCH="test"
+  export BOOST_GIT_MAIN_BRANCH="test"
   export CIRCLE_BRANCH=not-main
   init.config
 
-  assert_equal "${BOOST_GIT_BASE}" "${BOOST_MAIN_BRANCH}"
+  assert_equal "${BOOST_GIT_BASE}" "${BOOST_GIT_MAIN_BRANCH}"
 }
 
 @test "init.cli creates tmpdir" {
@@ -227,7 +227,7 @@ teardown ()
   run main.scan
 
   boost_call_args=$(cat "${BATS_TEST_TMPDIR}/boost.call_args")
-  assert_equal "${boost_call_args}" "scan repo arguments HEAD"
+  assert_equal "${boost_call_args}" "scan repo arguments"
 }
 
 @test "scan" {

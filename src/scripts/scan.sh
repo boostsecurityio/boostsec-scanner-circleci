@@ -27,8 +27,8 @@ init.config ()
          BOOST_CLI_URL=${BOOST_CLI_URL%*/}
   export BOOST_DOWNLOAD_URL=${BOOST_DOWNLOAD_URL:-${BOOST_CLI_URL}/boost-cli/get-boost-cli}
 
-  export BOOST_MAIN_BRANCH
-         BOOST_MAIN_BRANCH=${BOOST_MAIN_BRANCH:-$(git.ls_remote)}
+  export BOOST_GIT_MAIN_BRANCH
+         BOOST_GIT_MAIN_BRANCH=${BOOST_GIT_MAIN_BRANCH:-$(git.ls_remote)}
 
   init.ci.config
 }
@@ -37,8 +37,8 @@ init.ci.config ()
 {
   export BOOST_API_TOKEN=${!BOOST_API_TOKEN_VAR}
 
-  if [ "${CIRCLE_BRANCH:-}" != "${BOOST_MAIN_BRANCH}" ]; then
-    export BOOST_GIT_BASE=${BOOST_MAIN_BRANCH}
+  if [ "${CIRCLE_BRANCH:-}" != "${BOOST_GIT_MAIN_BRANCH}" ]; then
+    export BOOST_GIT_BASE=${BOOST_GIT_MAIN_BRANCH}
   fi
 }
 
@@ -58,7 +58,7 @@ main.scan ()
   init.cli
 
   # shellcheck disable=SC2086
-  exec ${BOOST_EXE} scan repo ${BOOST_CLI_ARGUMENTS:-} HEAD
+  exec ${BOOST_EXE} scan repo ${BOOST_CLI_ARGUMENTS:-}
 }
 
 if ! ${BATS_ENABLED:-false}; then
