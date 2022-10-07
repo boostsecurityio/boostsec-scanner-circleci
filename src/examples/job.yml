@@ -22,6 +22,7 @@ usage:
             name: scan
             context: boost-security
             api_token_var: BOOST_API_TOKEN
+            registry_module: scanners/boostsecurityio/native-scanner
         - push:
             requires:
               - test

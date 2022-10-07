@@ -20,6 +20,8 @@ workflows:
       - shellcheck/check:
           exclude: SC2148,SC2038,SC2086,SC2002,SC2016
           filters: *filters
+      - test:
+          filters: *filters
       - orb-tools/publish:
           orb-name: boostsecurityio/scanner
           vcs-type: << pipeline.project.type >>
@@ -33,3 +35,12 @@ workflows:
           vcs-type: << pipeline.project.type >>
           requires: [orb-tools/publish]
           filters: *filters
+
+jobs:
+  test:
+    machine:
+      image: ubuntu-2004:202111-02
+    steps:
+      - checkout
+      - run: make test.build
+      - run: make test
