@@ -35,7 +35,7 @@ init.config ()
 
 init.ci.config ()
 {
-  export BOOST_API_TOKEN=${!BOOST_API_TOKEN_VAR}
+  export BOOST_API_TOKEN=${!BOOST_API_TOKEN_VAR:-}
 
   if [ "${CIRCLE_BRANCH:-}" != "${BOOST_GIT_MAIN_BRANCH}" ]; then
     export BOOST_GIT_BASE=${BOOST_GIT_MAIN_BRANCH}
