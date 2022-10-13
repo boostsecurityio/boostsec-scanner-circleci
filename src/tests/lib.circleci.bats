@@ -32,6 +32,14 @@ teardown ()
   assert_equal "${BOOST_API_TOKEN}" "${BOOST_API_TOKEN_DATA}"
 }
 
+@test "init.ci.config BOOST_API_TOKEN undefined" {
+  export BOOST_API_TOKEN
+  export BOOST_API_TOKEN_VAR=BOOST_API_TOKEN_DATA
+  init.config
+
+  assert_equal "${BOOST_API_TOKEN}" ""
+}
+
 @test "init.ci.config BOOST_GIT_BASE defined" {
   export BOOST_GIT_BASE=""
   export BOOST_GIT_MAIN_BRANCH="test"
