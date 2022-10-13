@@ -39,6 +39,11 @@ init.ci.config ()
 
   if [ "${CIRCLE_BRANCH:-}" != "${BOOST_GIT_MAIN_BRANCH}" ]; then
     export BOOST_GIT_BASE=${BOOST_GIT_MAIN_BRANCH}
+
+    if [ -z "${CIRCLE_PULL_REQUEST:-}" ]; then
+      log.info "non-main branch without a pull-request is not supported"
+      exit 0
+    fi
   fi
 }
 

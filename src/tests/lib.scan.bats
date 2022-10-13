@@ -9,8 +9,8 @@ setup ()
   export BATS_ENABLED=true
   export SCRIPT_PATH=${PROJECT_ROOT}/src/scripts
 
+  export CIRCLE_BRANCH="main"
   export BOOST_GIT_MAIN_BRANCH="main" # do not attempt git ops
-
   export BOOST_API_TOKEN_VAR=BOOST_API_TOKEN_VALUE
   export BOOST_API_TOKEN_VALUE=123456
 
@@ -115,6 +115,7 @@ teardown ()
 }
 
 @test "init.config BOOST_GIT_MAIN_BRANCH defined" {
+  export CIRCLE_BRANCH="master"
   export BOOST_GIT_MAIN_BRANCH=""
 
   pushd ${BATS_TEST_TMPDIR} > /dev/null
@@ -131,24 +132,6 @@ teardown ()
   init.config
 
   assert_equal "${BOOST_GIT_MAIN_BRANCH}" "main"
-}
-
-@test "init.config BOOST_API_TOKEN defined" {
-  export BOOST_API_TOKEN
-  export BOOST_API_TOKEN_VAR=BOOST_API_TOKEN_DATA
-  export BOOST_API_TOKEN_DATA=123456
-  init.config
-
-  assert_equal "${BOOST_API_TOKEN}" "${BOOST_API_TOKEN_DATA}"
-}
-
-@test "init.config BOOST_GIT_BASE defined" {
-  export BOOST_GIT_BASE=""
-  export BOOST_GIT_MAIN_BRANCH="test"
-  export CIRCLE_BRANCH=not-main
-  init.config
-
-  assert_equal "${BOOST_GIT_BASE}" "${BOOST_GIT_MAIN_BRANCH}"
 }
 
 @test "init.cli creates tmpdir" {
