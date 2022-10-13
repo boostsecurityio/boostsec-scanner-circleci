@@ -22,12 +22,14 @@ jobs:
   command-tests-pr:
     docker:
       - image: cimg/base:stable
+    environment:
+      # TODO: pull requests are not propagated with triggered jobs
+      CIRCLE_PULL_REQUEST: https://circleci.com/gh/boostsecurityio/boostsec-scanner-circleci/392
     steps:
       - checkout
       - setup_remote_docker
       - boostsec/scan:
           api_enabled: false # TODO: temporarily disabled
-          additional_args: "--pull-request=1" # TODO -- PR number not preserved during dynamic config
           registry_module: scanners/boostsecurityio/native-scanner
 
 workflows:
