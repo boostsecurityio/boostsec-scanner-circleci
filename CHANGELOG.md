@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.1..HEAD)
+## Unreleased - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.3..HEAD)
+
+## v4.0.3 - 2022-11-02 - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.2...v4.0.3)
+
+- Add new 'install' circleci orb command
 
 ## v4.0.2 - 2022-10-13 - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.1...v4.0.2)
 
