@@ -1,0 +1,20 @@
+description: >
+  Scans the git repository for security issues or violations and uploads
+  the results to the Boost Security API.
+
+parameters:
+  cli_version:
+    description: >
+      CLI version to download, may be Major, Major.Minor or Major.Minor.Patch
+    type: string
+    default: "1"
+
+steps:
+  - run:
+      name: Installing boost cli
+      environment:
+        CLI_WRAPPER: <<include(scripts/install.sh)>>
+      command: |
+        [ -w /usr/local/bin ] && SUDO="" || SUDO=sudo
+        /bin/echo "${CLI_WRAPPER}" | ${SUDO} tee /usr/local/bin/boost > /dev/null
+        ${SUDO} chmod 755 /usr/local/bin/boost
