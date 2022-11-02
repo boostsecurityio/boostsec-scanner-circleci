@@ -16,6 +16,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - boostsec/install
+      - run: boost version
       - boostsec/scan:
           api_enabled: false # TODO: temporarily disabled
           registry_module: scanners/boostsecurityio/native-scanner
@@ -30,6 +31,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - boostsec/install
+      - run: boost version
       - boostsec/scan:
           api_enabled: false # TODO: temporarily disabled
           registry_module: scanners/boostsecurityio/native-scanner
