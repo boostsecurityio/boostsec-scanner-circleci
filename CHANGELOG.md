@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ## v4.0.4 - 2022-11-02 - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.3...v4.0.4)
 
 - Ensure that the new 'boost' command from the 'install' step requires a git repository
+- Fix documentation examples
 
 ## v4.0.3 - 2022-11-02 - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.2...v4.0.3)
 
