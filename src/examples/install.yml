@@ -1,0 +1,28 @@
+description: >
+  Install the boost scanner in your ci environment
+
+usage:
+  version: 2.1
+
+  orbs:
+    boost-security-scanner: boostsecurityio/scanner@x.y.z
+
+  workflows:
+    version: 2
+
+    build:
+      jobs:
+        - test
+        - scan:
+            context: boost-security
+        - push:
+            requires:
+              - test
+
+jobs:
+  scan:
+    executor: default
+    steps:
+      - checkout
+      - boost-security-scanner/install
+      - run: boost version
