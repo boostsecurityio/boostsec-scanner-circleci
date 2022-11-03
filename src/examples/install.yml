@@ -19,10 +19,10 @@ usage:
             requires:
               - test
 
-jobs:
-  scan:
-    executor: default
-    steps:
-      - checkout
-      - boost-security-scanner/install
-      - run: boost version
+  jobs:
+    scan:
+      executor: default
+      steps:
+        - checkout
+        - boost-security-scanner/install
+        - run: boost version

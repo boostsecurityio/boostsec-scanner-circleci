@@ -19,11 +19,11 @@ usage:
             requires:
               - test
 
-jobs:
-  scan:
-    executor: default
-    steps:
-      - checkout
-      - boost-security-scanner/scan:
-          api_token_var: BOOST_API_TOKEN
-          registry_module: scanners/boostsecurityio/native-scanner
+  jobs:
+    scan:
+      executor: default
+      steps:
+        - checkout
+        - boost-security-scanner/scan:
+            api_token_var: BOOST_API_TOKEN
+            registry_module: scanners/boostsecurityio/native-scanner

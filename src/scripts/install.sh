@@ -66,6 +66,11 @@ if ! ${BATS_ENABLED:-false}; then
   set -o pipefail
   set -u
 
+  if ! test -d .git; then
+    log.error "boost must be run at the root of your project repository"
+    exit 1
+  fi
+
   main.install
 
   set +u
