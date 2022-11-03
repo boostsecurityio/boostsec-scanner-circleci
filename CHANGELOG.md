@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.3..HEAD)
+## Unreleased - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.4..HEAD)
+
+## v4.0.4 - 2022-11-02 - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.3...v4.0.4)
+
+- Ensure that the new 'boost' command from the 'install' step requires a git repository
 
 ## v4.0.3 - 2022-11-02 - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.2...v4.0.3)
 
