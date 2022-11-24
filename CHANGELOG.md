@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.4..HEAD)
+## Unreleased - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.5..HEAD)
+
+## v4.0.5 - 2022-10-24 - [Github](https://github.com/boostsecurityio/boostsec-scanner-github/compare/v4.0.4...v4.0.5)
+
+- Add scanner\_id and scan\_label options
 
 ## v4.0.4 - 2022-11-02 - [Github](https://github.com/boostsecurityio/boostsec-scanner-circleci/compare/v4.0.3...v4.0.4)
 
