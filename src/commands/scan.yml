@@ -62,6 +62,18 @@ parameters:
       Module within the scanner registry to execute
     type: string
 
+  scanner_id:
+    description: >
+      Optional identifier to uniquely identify the scanner
+    type: string
+    default: ""
+
+  scan_label:
+    description: >
+      Optional identifier to identify a a monorepo component
+    type: string
+    default: ""
+
   scan_timeout:
     description: >
       Maximum amount of time a diff scan should complete in
@@ -83,5 +95,7 @@ steps:
         BOOST_IGNORE_FAILURE: <<parameters.ignore_failure>>
         BOOST_LOG_LEVEL: <<parameters.log_level>>
         BOOST_PRE_SCAN: <<parameters.pre_scan_cmd>>
+        BOOST_SCAN_LABEL: <<parameters.scan_label>>
+        BOOST_SCANNER_ID: <<parameters.scanner_id>>
         BOOST_SCANNER_REGISTRY_MODULE: <<parameters.registry_module>>
       no_output_timeout: 120m

@@ -66,6 +66,18 @@ parameters:
       Module within the scanner registry to execute
     type: string
 
+  scanner_id:
+    description: >
+      Optional identifier to uniquely identify the scanner
+    type: string
+    default: ""
+
+  scan_label:
+    description: >
+      Optional identifier to identify a a monorepo component
+    type: string
+    default: ""
+
   scan_timeout:
     description: >
       Maximum amount of time a diff scan should complete in
@@ -91,4 +103,6 @@ steps:
       main_branch: <<parameters.main_branch>>
       pre_scan_cmd: <<parameters.pre_scan_cmd>>
       registry_module: <<parameters.registry_module>>
+      scanner_id: <<parameters.scanner_id>>
+      scan_label: <<parameters.scan_label>>
       scan_timeout: <<parameters.scan_timeout>>
