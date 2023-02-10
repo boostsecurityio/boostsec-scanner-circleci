@@ -78,6 +78,12 @@ parameters:
     type: string
     default: ""
 
+  scan_path:
+    description: >
+      Optional relative path to scan. Must be used with a scan_label.
+    type: string
+    default: ""
+
   scan_timeout:
     description: >
       Maximum amount of time a diff scan should complete in
@@ -105,4 +111,5 @@ steps:
       registry_module: <<parameters.registry_module>>
       scanner_id: <<parameters.scanner_id>>
       scan_label: <<parameters.scan_label>>
+      scan_path: <<parameters.scan_path>>
       scan_timeout: <<parameters.scan_timeout>>
