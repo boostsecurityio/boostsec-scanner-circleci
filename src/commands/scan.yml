@@ -74,6 +74,12 @@ parameters:
     type: string
     default: ""
 
+  scan_path:
+    description: >
+      Optional relative path to scan. Must be used with a scan_label.
+    type: string
+    default: ""
+
   scan_timeout:
     description: >
       Maximum amount of time a diff scan should complete in
@@ -96,6 +102,7 @@ steps:
         BOOST_LOG_LEVEL: <<parameters.log_level>>
         BOOST_PRE_SCAN: <<parameters.pre_scan_cmd>>
         BOOST_SCAN_LABEL: <<parameters.scan_label>>
+        BOOST_SCAN_PATH: <<parameters.scan_path>>
         BOOST_SCANNER_ID: <<parameters.scanner_id>>
         BOOST_SCANNER_REGISTRY_MODULE: <<parameters.registry_module>>
       no_output_timeout: 120m
