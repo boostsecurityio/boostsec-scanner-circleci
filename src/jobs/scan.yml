@@ -4,7 +4,7 @@ description: >
 
 machine:
   docker_layer_caching: <<parameters.executor_docker_layer_caching>>
-  image: ubuntu-2204:2022.04.1
+  image: ubuntu-2204:current
 
 parameters:
   additional_args:
