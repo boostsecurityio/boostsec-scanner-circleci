@@ -1,6 +1,7 @@
 version: 2.1
 setup: true
 orbs:
+  boostsec: boostsecurityio/scanner@4
   orb-tools: circleci/orb-tools@11.1
   shellcheck: circleci/shellcheck@3.1
 
@@ -35,6 +36,11 @@ workflows:
           vcs-type: << pipeline.project.type >>
           requires: [orb-tools/publish]
           filters: *filters
+      # Scan with current scanner
+      - boostsec/scan:
+          api_enabled: false # TODO: temporarily disabled
+          name: scan
+          registry_module: scanners/boostsecurityio/native-scanner
 
 jobs:
   test:
@@ -44,3 +50,15 @@ jobs:
       - checkout
       - run: make test.build
       - run: make test
+  scan:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - boostsec/install
+      - run: boost version
+      - boostsec/scan:
+          api_enabled: false # TODO: temporarily disabled
+          registry_module: scanners/boostsecurityio/native-scanner
+
